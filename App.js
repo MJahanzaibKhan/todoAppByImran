@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type {Node} from 'react';
+import React, { useState } from 'react';
+import type { Node } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -16,6 +16,8 @@ import {
   Text,
   useColorScheme,
   View,
+  TextInput,
+  Button
 } from 'react-native';
 
 import {
@@ -26,7 +28,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
+const Section = ({ children, title }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -52,7 +54,11 @@ const Section = ({children, title}): Node => {
   );
 };
 
-const App: () => Node = () => {
+const App = () => {
+  const [save, setSave] = useState('');
+  function save_Data(){
+   setSave("heelo")
+  }
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -65,26 +71,26 @@ const App: () => Node = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+        <View style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', backgroundColor: 'white' }}>
+          <Text style={{ fontSize: 20, marginBottom: 10 }}>TodoApp</Text>
+
+          <View>
+            <TextInput placeholder='add comment' value={save} onChangeText={setSave} />
+          </View>
+
+          <View>
+            <TextInput placeholder='add comment' />
+          </View>
+
+          <View>
+            <TextInput placeholder='add comment'  />
+          </View>
+          <Button title="click herer" onPress={save_Data}/>
         </View>
+        <View>
+          <Text>{save}</Text>
+        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -110,3 +116,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
